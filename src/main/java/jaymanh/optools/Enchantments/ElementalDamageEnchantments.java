@@ -1,5 +1,6 @@
 package jaymanh.optools.Enchantments;
 
+
 import jaymanh.optools.OpTools;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -57,7 +58,7 @@ public class ElementalDamageEnchantments {
 
         OpTools.register(Identifier.parse("elemental_lightning"), (world, level, context, user, pos) -> {
             //LOGGER.info("test");
-            LightningBolt lightning = new LightningBolt(EntityTypes.LIGHTNING_BOLT, world);
+            LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, world);
             lightning.setPos(user.getX(), user.getY(), user.getZ());
             lightning.setVisualOnly(false);
             world.addFreshEntity(lightning);
