@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +42,7 @@ public class ModTools {
             "diamondium_pickaxe"
     );
     public static final Item DIAMONDIUM_AXE = register(
-            new Item(new Item.Properties().axe(ToolMaterials.DIAMONDIUM.getMaterial(),15,0.4f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_axe"))),
+            new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(), new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_axe"))),
             "diamondium_axe"
     );
     public static final Item DIAMONDIUM_SHOVEL = register(
@@ -62,7 +63,7 @@ public class ModTools {
             "diamondillium_pickaxe"
     );
     public static final Item DIAMONDILLIUM_AXE = register(
-            new Item(new Item.Properties().axe(ToolMaterials.DIAMONDILLIUM.getMaterial(),15,0.4f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_axe"))),
+            new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_axe"))),
             "diamondillium_axe"
     );
     public static final Item DIAMONDILLIUM_SHOVEL = register(
