@@ -41,7 +41,7 @@ public class ModTools {
             new Item(new Item.Properties().pickaxe(ToolMaterials.DIAMONDIUM.getMaterial(),5,0.2f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_pickaxe"))),
             "diamondium_pickaxe"
     );
-    public static final Item DIAMONDIUM_AXE = register(
+    public static final AxeItem DIAMONDIUM_AXE = (AxeItem) register(
             new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(), 15, 0.4f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_axe"))),
             "diamondium_axe"
     );
@@ -62,7 +62,7 @@ public class ModTools {
             new Item(new Item.Properties().pickaxe(ToolMaterials.DIAMONDILLIUM.getMaterial(),5,0.2f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_pickaxe"))),
             "diamondillium_pickaxe"
     );
-    public static final Item DIAMONDILLIUM_AXE = register(
+    public static final AxeItem DIAMONDILLIUM_AXE = (AxeItem) register(
             new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 15, 0.4f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_axe"))),
             "diamondillium_axe"
     );
