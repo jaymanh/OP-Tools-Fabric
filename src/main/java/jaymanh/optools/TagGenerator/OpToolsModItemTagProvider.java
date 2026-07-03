@@ -7,8 +7,11 @@ import jaymanh.optools.Tools.ModTools;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import java.util.concurrent.CompletableFuture;
+
+import static jaymanh.optools.OpTools.MOD_ID;
 
 public class OpToolsModItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
     public OpToolsModItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
@@ -17,47 +20,47 @@ public class OpToolsModItemTagProvider extends FabricTagsProvider.ItemTagsProvid
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
-        valueLookupBuilder(ItemTags.SWORDS)
-                .add(ModTools.DIAMONDILLIUM_SWORD)
-                .add(ModTools.DIAMONDIUM_SWORD);
+        getOrCreateRawBuilder(ItemTags.SWORDS)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDILLIUM_SWORD.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDIUM_SWORD.toString()));
 
-        valueLookupBuilder(ItemTags.PICKAXES)
-                .add(ModTools.DIAMONDILLIUM_PICKAXE)
-                .add(ModTools.DIAMONDIUM_PICKAXE);
+        getOrCreateRawBuilder(ItemTags.PICKAXES)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDILLIUM_PICKAXE.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDIUM_PICKAXE.toString()));
 
-        valueLookupBuilder(ItemTags.AXES)
-                .add(ModTools.DIAMONDILLIUM_AXE)
-                .add(ModTools.DIAMONDIUM_AXE);
+        getOrCreateRawBuilder(ItemTags.AXES)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDILLIUM_AXE.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDIUM_AXE.toString()));
 
-        valueLookupBuilder(ItemTags.HOES)
-                .add(ModTools.DIAMONDILLIUM_HOE)
-                .add(ModTools.DIAMONDIUM_HOE);
+        getOrCreateRawBuilder(ItemTags.HOES)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDILLIUM_HOE.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDIUM_HOE.toString()));
 
-        valueLookupBuilder(ItemTags.SHOVELS)
-                .add(ModTools.DIAMONDILLIUM_SHOVEL)
-                .add(ModTools.DIAMONDIUM_SHOVEL);
+        getOrCreateRawBuilder(ItemTags.SHOVELS)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDILLIUM_SHOVEL.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModTools.DIAMONDIUM_SHOVEL.toString()));
 
-        valueLookupBuilder(ItemTags.HEAD_ARMOR)
-                .add(ModArmor.DIAMONDILLIUM_HELMET)
-                .add(ModArmor.DIAMONDIUM_HELMET);
+        getOrCreateRawBuilder(ItemTags.HEAD_ARMOR)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDILLIUM_HELMET.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDIUM_HELMET.toString()));
 
-        valueLookupBuilder(ItemTags.CHEST_ARMOR)
-                .add(ModArmor.DIAMONDILLIUM_CHESTPLATE)
-                .add(ModArmor.DIAMONDIUM_CHESTPLATE);
+        getOrCreateRawBuilder(ItemTags.CHEST_ARMOR)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDILLIUM_CHESTPLATE.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDIUM_CHESTPLATE.toString()));
 
-        valueLookupBuilder(ItemTags.LEG_ARMOR)
-                .add(ModArmor.DIAMONDILLIUM_LEGGINGS)
-                .add(ModArmor.DIAMONDIUM_LEGGINGS);
+        getOrCreateRawBuilder(ItemTags.LEG_ARMOR)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDILLIUM_LEGGINGS.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDIUM_LEGGINGS.toString()));
 
-        valueLookupBuilder(ItemTags.FOOT_ARMOR)
-                .add(ModArmor.DIAMONDILLIUM_BOOTS)
-                .add(ModArmor.DIAMONDIUM_BOOTS);
+        getOrCreateRawBuilder(ItemTags.FOOT_ARMOR)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDILLIUM_BOOTS.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModArmor.DIAMONDIUM_BOOTS.toString()));
 
-        valueLookupBuilder(ItemTags.BEACON_PAYMENT_ITEMS)
-                .add(ModItems.DIAMONDILLIUM_INGOT)
-                .add(ModItems.DIAMONDIUM_INGOT);
+        getOrCreateRawBuilder(ItemTags.BEACON_PAYMENT_ITEMS)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModItems.DIAMONDILLIUM_INGOT.toString()))
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModItems.DIAMONDIUM_INGOT.toString()));
 
-        valueLookupBuilder(ItemTags.MEAT)
-                .add(ModFoodItems.SUPER_MEAT);
+        getOrCreateRawBuilder(ItemTags.MEAT)
+                .addOptionalTag(Identifier.fromNamespaceAndPath(MOD_ID, ModFoodItems.SUPER_MEAT.toString()));
     }
 }
