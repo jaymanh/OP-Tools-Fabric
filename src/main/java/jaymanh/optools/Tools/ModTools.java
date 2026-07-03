@@ -42,7 +42,7 @@ public class ModTools {
             "diamondium_pickaxe"
     );
     public static final Item DIAMONDIUM_AXE = register(
-            new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(),15,0.4f, new Item.Settings().rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_axe"))),
+            new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(), 15, 0.4f, new Item.Settings().rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_axe"))),
             "diamondium_axe"
     );
     public static final Item DIAMONDIUM_SHOVEL = register(
@@ -53,7 +53,14 @@ public class ModTools {
             new HoeItem(ToolMaterials.DIAMONDIUM.getMaterial(),7,1f, new Item.Settings().rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_hoe"))),
             "diamondium_hoe"
     );
-public static final Item DIAMONDILLIUM_SWORD = register(
+    /*
+    public static final Item DIAMONDIUM_HOE = register(
+            new Item(new Item.Settings().hoe(ToolMaterials.DIAMONDIUM.getMaterial(),7,1f).rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_hoe"))),
+            "diamondium_hoe"
+    );
+     */
+
+    public static final Item DIAMONDILLIUM_SWORD = register(
             new Item(new Item.Settings().sword(ToolMaterials.DIAMONDILLIUM.getMaterial(),10,0.5f).rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_sword"))),
             "diamondillium_sword"
     );
@@ -62,7 +69,7 @@ public static final Item DIAMONDILLIUM_SWORD = register(
             "diamondillium_pickaxe"
     );
     public static final Item DIAMONDILLIUM_AXE = register(
-            new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(),15,0.4f, new Item.Settings().rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_axe"))),
+            new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 15, 0.4f, new Item.Settings().rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_axe"))),
             "diamondillium_axe"
     );
     public static final Item DIAMONDILLIUM_SHOVEL = register(
@@ -74,7 +81,15 @@ public static final Item DIAMONDILLIUM_SWORD = register(
             new HoeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(),6,1f, new Item.Settings().rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_hoe"))),
             "diamondillium_hoe"
     );
-public static void initialise(){
+    /*
+    public static final Item DIAMONDILLIUM_HOE = register(
+            new Item(new Item.Settings().hoe(ToolMaterials.DIAMONDILLIUM.getMaterial(),6,1f).rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_hoe"))),
+            "diamondillium_hoe"
+    );
+     */
+
+
+    public static void initialise(){
         Registry.register(Registries.ITEM_GROUP, OP_TOOLS_ITEM_GROUP_KEY, OP_TOOLS_ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(OP_TOOLS_ITEM_GROUP_KEY).register((itemGroup) -> {
             itemGroup.add(ModTools.DIAMONDILLIUM_SWORD);
