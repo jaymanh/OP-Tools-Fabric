@@ -59,6 +59,7 @@ public class OpTools implements ModInitializer {
 		ModArmor.initialise();
 		ModItems.initialise();
 		ModBlocks.initialize();
+		ModEnchantments.initialise();
 		ModOreGenerator.initialise();
 		ModBlockEntitys.initialise();
 		ModScreenHandlers.registerScreenHandlers();
@@ -69,5 +70,6 @@ public class OpTools implements ModInitializer {
 		AutoReplantEnchantment.initialise();
 		ElementalDamageEnchantments.initialise();
 		EnchantTick.initialise();
+		EnchantEventHandler.initialise();
 	}
 }
