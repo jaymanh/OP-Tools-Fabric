@@ -14,6 +14,7 @@ public class ModEnchantments {
     public static final RegistryKey<Enchantment> ELEMENTAL_FIRE = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(MOD_ID, "elemental_fire"));
     public static final RegistryKey<Enchantment> ELEMENTAL_LIGHTNING = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(MOD_ID, "elemental_lightning"));
     public static final RegistryKey<Enchantment> ELEMENTAL_WATER = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(MOD_ID, "elemental_water"));
+    public static final RegistryKey<Enchantment> ELEMENTAL_ICE = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(MOD_ID, "elemental_ice"));
     public static final RegistryKey<Enchantment> TREE_BREAKER = RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of(MOD_ID, "tree_breaker"));
 
     public static void initialise(){
