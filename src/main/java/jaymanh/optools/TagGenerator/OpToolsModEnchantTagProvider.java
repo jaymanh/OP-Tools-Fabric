@@ -24,6 +24,7 @@ public class OpToolsModEnchantTagProvider extends EnchantmentTagsProvider {
                 .addOptional(ModEnchantments.ELEMENTAL_FIRE)
                 .addOptional(ModEnchantments.ELEMENTAL_LIGHTNING)
                 .addOptional(ModEnchantments.ELEMENTAL_WATER)
+                .addOptional(ModEnchantments.ELEMENTAL_ICE)
                 .addOptional(ModEnchantments.TREE_BREAKER);
 
         this.tag(EnchantmentTags.ON_TRADED_EQUIPMENT)
@@ -33,6 +34,7 @@ public class OpToolsModEnchantTagProvider extends EnchantmentTagsProvider {
                 .addOptional(ModEnchantments.ELEMENTAL_FIRE)
                 .addOptional(ModEnchantments.ELEMENTAL_LIGHTNING)
                 .addOptional(ModEnchantments.ELEMENTAL_WATER)
+                .addOptional(ModEnchantments.ELEMENTAL_ICE)
                 .addOptional(ModEnchantments.TREE_BREAKER);
 
         this.tag(EnchantmentTags.NON_TREASURE)
@@ -42,6 +44,7 @@ public class OpToolsModEnchantTagProvider extends EnchantmentTagsProvider {
                 .addOptional(ModEnchantments.ELEMENTAL_FIRE)
                 .addOptional(ModEnchantments.ELEMENTAL_LIGHTNING)
                 .addOptional(ModEnchantments.ELEMENTAL_WATER)
+                .addOptional(ModEnchantments.ELEMENTAL_ICE)
                 .addOptional(ModEnchantments.TREE_BREAKER);
 
         this.tag(EnchantmentTags.IN_ENCHANTING_TABLE)
@@ -51,6 +54,7 @@ public class OpToolsModEnchantTagProvider extends EnchantmentTagsProvider {
                 .addOptional(ModEnchantments.ELEMENTAL_FIRE)
                 .addOptional(ModEnchantments.ELEMENTAL_LIGHTNING)
                 .addOptional(ModEnchantments.ELEMENTAL_WATER)
+                .addOptional(ModEnchantments.ELEMENTAL_ICE)
                 .addOptional(ModEnchantments.TREE_BREAKER)
                 .addOptional(Enchantments.MENDING);
     }

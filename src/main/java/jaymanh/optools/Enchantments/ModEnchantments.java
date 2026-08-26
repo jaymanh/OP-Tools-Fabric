@@ -14,6 +14,7 @@ public class ModEnchantments {
     public static final ResourceKey<Enchantment> ELEMENTAL_FIRE = ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(MOD_ID, "elemental_fire"));
     public static final ResourceKey<Enchantment> ELEMENTAL_LIGHTNING = ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(MOD_ID, "elemental_lightning"));
     public static final ResourceKey<Enchantment> ELEMENTAL_WATER = ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(MOD_ID, "elemental_water"));
+    public static final ResourceKey<Enchantment> ELEMENTAL_ICE = ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(MOD_ID, "elemental_ice"));
     public static final ResourceKey<Enchantment> TREE_BREAKER = ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(MOD_ID, "tree_breaker"));
 
     public static void initialise(){
