@@ -42,14 +42,8 @@ public class RefineryBlock extends BlockWithEntity implements BlockEntityProvide
 
     @Override
     public void onStateReplaced(BlockState state, ServerWorld serverWorld, BlockPos pos, boolean moved) {
-        if (state.getBlock() != serverWorld.getBlockState(pos).getBlock()){
-            BlockEntity blockEntity = serverWorld.getBlockEntity(pos);
-            if(blockEntity instanceof RefineryBlockEntity){
-                ItemScatterer.spawn(serverWorld, pos, (RefineryBlockEntity)blockEntity);
-                serverWorld.updateComparators(pos, this);
-            }
-            super.onStateReplaced(state, serverWorld, pos, moved);
-        }
+        ItemScatterer.onStateReplaced(state, serverWorld, pos);
+        super.onStateReplaced(state, serverWorld, pos, moved);
     }
     protected boolean hasComparatorOutput(BlockState state) {
         return true;
