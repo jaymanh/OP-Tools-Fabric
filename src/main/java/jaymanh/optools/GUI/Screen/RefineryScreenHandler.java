@@ -31,7 +31,12 @@ public class RefineryScreenHandler extends AbstractContainerMenu {
         this.blockEntity = ((RefineryBlockEntity) blockEntity);
 
         this.addSlot(new Slot(inventory, 0, 80, 11));
-        this.addSlot(new Slot(inventory, 1, 80, 59));
+        this.addSlot(new Slot(inventory, 1, 80, 59) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+        });
 
 
         addPlayerInventory(playerInventory);
