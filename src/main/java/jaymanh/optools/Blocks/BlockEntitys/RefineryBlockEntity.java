@@ -34,7 +34,7 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Ext
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
     private static final int[] TOP_SLOTS = new int[]{0};
-    private static final int[] BOTTOM_SLOTS = new int[]{1, 1};
+    private static final int[] BOTTOM_SLOTS = new int[]{1};
     private static final int[] SIDE_SLOTS = new int[]{0};
 
     protected final ContainerData propertyDelegate;
@@ -79,7 +79,7 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Ext
     protected void saveAdditional(ValueOutput writeView) {
         super.saveAdditional(writeView);
         ContainerHelper.saveAllItems(writeView, this.inventory);
-        writeView.putInt("refinery.progress", 0);
+        writeView.putInt("refinery.progress", this.progress);
     }
 
     @Override
@@ -106,7 +106,9 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Ext
 
     @Override
     protected void setItems(NonNullList<ItemStack> inventory) {
-
+        for (int i = 0; i < this.inventory.size(); i++) {
+            this.inventory.set(i, i < inventory.size() ? inventory.get(i) : ItemStack.EMPTY);
+        }
     }
 
     @Nullable
@@ -193,5 +195,15 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Ext
     @Override
     public BlockPosPayload getScreenOpeningData(ServerPlayer player) {
         return new BlockPosPayload(this.worldPosition);
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction side) {
+        return slot == INPUT_SLOT && stack.getItem() == ModItems.RAW_DARKMATTER;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction side) {
+        return slot == OUTPUT_SLOT;
     }
 }
