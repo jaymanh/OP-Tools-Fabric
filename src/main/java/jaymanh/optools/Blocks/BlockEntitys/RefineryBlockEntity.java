@@ -34,7 +34,7 @@ public class RefineryBlockEntity extends LockableContainerBlockEntity implements
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
     private static final int[] TOP_SLOTS = new int[]{0};
-    private static final int[] BOTTOM_SLOTS = new int[]{1, 1};
+    private static final int[] BOTTOM_SLOTS = new int[]{1};
     private static final int[] SIDE_SLOTS = new int[]{0};
 
     protected final PropertyDelegate propertyDelegate;
@@ -111,7 +111,9 @@ public class RefineryBlockEntity extends LockableContainerBlockEntity implements
 
     @Override
     protected void setHeldStacks(DefaultedList<ItemStack> inventory) {
-
+        for (int i = 0; i < this.inventory.size(); i++) {
+            this.inventory.set(i, i < inventory.size() ? inventory.get(i) : ItemStack.EMPTY);
+        }
     }
 
     @Nullable
@@ -198,5 +200,15 @@ public class RefineryBlockEntity extends LockableContainerBlockEntity implements
     @Override
     public BlockPosPayload getScreenOpeningData(ServerPlayerEntity player) {
         return new BlockPosPayload(this.pos);
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction dir) {
+        return slot == INPUT_SLOT && stack.getItem() == ModItems.RAW_DARKMATTER;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot == OUTPUT_SLOT;
     }
 }
