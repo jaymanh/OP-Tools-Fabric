@@ -25,6 +25,10 @@
       "required": false
     },
     {
+      "id": "op-tools:elemental_ice",
+      "required": false
+    },
+    {
       "id": "op-tools:tree_breaker",
       "required": false
     }
