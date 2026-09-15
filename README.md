@@ -1,5 +1,7 @@
 # OP Tools
-OP tools is a small fabric mod that adds some overpowered tools and their ores. 
+OP tools is a small fabric mod that adds some overpowered tools and their ores.
+
+Supported Minecraft version: **26.3** (Fabric Loader 0.19.5, Fabric API 0.160.5+26.3). 
 
 ## Modrinth page
 [OP Tools](https://modrinth.com/mod/op-tools)

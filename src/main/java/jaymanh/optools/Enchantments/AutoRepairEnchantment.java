@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -43,8 +42,7 @@ public class AutoRepairEnchantment implements ServerTickEvents.EndLevelTick {
                 int chance = Math.max(level / 2, 1);
                 chance = Math.min(chance, 100);
                 if(itemStack.isDamaged() && random.nextInt(100 / chance) == 0) {
-                    Consumer<Item> repairConsumer = item -> {
-
+                    Consumer<ItemStack> repairConsumer = stack -> {
                     };
                     itemStack.hurtAndBreak(-1 * level, world, (ServerPlayer) player, repairConsumer);
                 }

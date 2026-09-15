@@ -9,8 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -41,8 +39,8 @@ public class ModTools {
             new Item(new Item.Properties().pickaxe(ToolMaterials.DIAMONDIUM.getMaterial(),5,0.2f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_pickaxe"))),
             "diamondium_pickaxe"
     );
-    public static final AxeItem DIAMONDIUM_AXE = (AxeItem) register(
-            new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(), 15, 0.4f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_axe"))),
+    public static final Item DIAMONDIUM_AXE = register(
+            new Item(new Item.Properties().axe(ToolMaterials.DIAMONDIUM.getMaterial(), 15, 0.4f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_axe"))),
             "diamondium_axe"
     );
     public static final Item DIAMONDIUM_SHOVEL = register(
@@ -50,7 +48,7 @@ public class ModTools {
             "diamondium_shovel"
     );
     public static final Item DIAMONDIUM_HOE = register(
-            new HoeItem(ToolMaterials.DIAMONDIUM.getMaterial(),7,1f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_hoe"))),
+            new Item(new Item.Properties().hoe(ToolMaterials.DIAMONDIUM.getMaterial(), 7, 1f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_hoe"))),
             "diamondium_hoe"
     );
 
@@ -62,8 +60,8 @@ public class ModTools {
             new Item(new Item.Properties().pickaxe(ToolMaterials.DIAMONDILLIUM.getMaterial(),5,0.2f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_pickaxe"))),
             "diamondillium_pickaxe"
     );
-    public static final AxeItem DIAMONDILLIUM_AXE = (AxeItem) register(
-            new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 15, 0.4f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_axe"))),
+    public static final Item DIAMONDILLIUM_AXE = register(
+            new Item(new Item.Properties().axe(ToolMaterials.DIAMONDILLIUM.getMaterial(), 15, 0.4f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_axe"))),
             "diamondillium_axe"
     );
     public static final Item DIAMONDILLIUM_SHOVEL = register(
@@ -72,7 +70,7 @@ public class ModTools {
     );
 
     public static final Item DIAMONDILLIUM_HOE = register(
-            new HoeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(),6,1f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_hoe"))),
+            new Item(new Item.Properties().hoe(ToolMaterials.DIAMONDILLIUM.getMaterial(), 6, 1f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_hoe"))),
             "diamondillium_hoe"
     );
 

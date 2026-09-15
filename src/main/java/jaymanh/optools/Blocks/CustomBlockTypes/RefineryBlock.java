@@ -1,6 +1,5 @@
 package jaymanh.optools.Blocks.CustomBlockTypes;
 
-import com.mojang.serialization.MapCodec;
 import jaymanh.optools.Blocks.BlockEntitys.ModBlockEntitys;
 import jaymanh.optools.Blocks.BlockEntitys.RefineryBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -24,11 +23,6 @@ import org.jetbrains.annotations.Nullable;
 public class RefineryBlock extends BaseEntityBlock implements EntityBlock {
     public RefineryBlock(Properties settings) {
         super(settings);
-    }
-
-    @Override
-    protected MapCodec<? extends RefineryBlock> codec() {
-        return simpleCodec(RefineryBlock::new);
     }
 
     @Override
