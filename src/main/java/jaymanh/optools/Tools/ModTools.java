@@ -42,11 +42,11 @@ public class ModTools {
             "diamondium_pickaxe"
     );
     public static final Item DIAMONDIUM_AXE = register(
-            new Item(new Item.Settings().axe(ToolMaterials.DIAMONDIUM.getMaterial(),15,0.4f).rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_axe"))),
+            new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(), 15, 0.4f, new Item.Settings().rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_axe"))),
             "diamondium_axe"
     );
     public static final Item DIAMONDIUM_SHOVEL = register(
-            new Item(new Item.Settings().shovel(ToolMaterials.DIAMONDIUM.getMaterial(),8,0.5f).rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_shovel"))),
+            new ShovelItem(ToolMaterials.DIAMONDIUM.getMaterial(), 8, 0.5f, new Item.Settings().rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_shovel"))),
             "diamondium_shovel"
     );
     public static final Item DIAMONDIUM_HOE = register(
@@ -69,11 +69,11 @@ public class ModTools {
             "diamondillium_pickaxe"
     );
     public static final Item DIAMONDILLIUM_AXE = register(
-            new Item(new Item.Settings().axe(ToolMaterials.DIAMONDILLIUM.getMaterial(),15,0.4f).rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_axe"))),
+            new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 15, 0.4f, new Item.Settings().rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_axe"))),
             "diamondillium_axe"
     );
     public static final Item DIAMONDILLIUM_SHOVEL = register(
-            new Item(new Item.Settings().shovel(ToolMaterials.DIAMONDILLIUM.getMaterial(),8,0.5f).rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_shovel"))),
+            new ShovelItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 8, 0.5f, new Item.Settings().rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_shovel"))),
             "diamondillium_shovel"
     );
 
