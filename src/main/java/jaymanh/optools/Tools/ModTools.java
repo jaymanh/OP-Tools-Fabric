@@ -12,6 +12,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 
@@ -46,7 +47,7 @@ public class ModTools {
             "diamondium_axe"
     );
     public static final Item DIAMONDIUM_SHOVEL = register(
-            new Item(new Item.Properties().shovel(ToolMaterials.DIAMONDIUM.getMaterial(),8,0.5f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_shovel"))),
+            new ShovelItem(ToolMaterials.DIAMONDIUM.getMaterial(), 8, 0.5f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_shovel"))),
             "diamondium_shovel"
     );
     public static final Item DIAMONDIUM_HOE = register(
@@ -67,7 +68,7 @@ public class ModTools {
             "diamondillium_axe"
     );
     public static final Item DIAMONDILLIUM_SHOVEL = register(
-            new Item(new Item.Properties().shovel(ToolMaterials.DIAMONDILLIUM.getMaterial(),8,0.5f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_shovel"))),
+            new ShovelItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 8, 0.5f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_shovel"))),
             "diamondillium_shovel"
     );
 
