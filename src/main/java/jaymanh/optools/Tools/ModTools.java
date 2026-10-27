@@ -46,7 +46,7 @@ public class ModTools {
             "diamondium_axe"
     );
     public static final Item DIAMONDIUM_SHOVEL = register(
-            new Item(new Item.Settings().shovel(ToolMaterials.DIAMONDIUM.getMaterial(),8,0.5f).rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_shovel"))),
+            new ShovelItem(ToolMaterials.DIAMONDIUM.getMaterial(), 8, 0.5f, new Item.Settings().rarity(Rarity.EPIC).fireproof().registryKey(key("diamondium_shovel"))),
             "diamondium_shovel"
     );
     public static final Item DIAMONDIUM_HOE = register(
@@ -66,7 +66,7 @@ public static final Item DIAMONDILLIUM_SWORD = register(
             "diamondillium_axe"
     );
     public static final Item DIAMONDILLIUM_SHOVEL = register(
-            new Item(new Item.Settings().shovel(ToolMaterials.DIAMONDILLIUM.getMaterial(),8,0.5f).rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_shovel"))),
+            new ShovelItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 8, 0.5f, new Item.Settings().rarity(Rarity.RARE).fireproof().registryKey(key("diamondillium_shovel"))),
             "diamondillium_shovel"
     );
 
