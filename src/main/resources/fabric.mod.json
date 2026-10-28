@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "op-tools",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"name": "OP Tools",
 	"description": "This is a basic mod that adds op tools to survival",
 	"authors": [
@@ -25,20 +25,10 @@
 			"jaymanh.optools.OpToolsDataGenerator"
 		]
 	},
-	"mixins": [
-		"op-tools.mixins.json",
-		{
-			"config": "op-tools.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.16.3",
 		"minecraft": "~1.20.4",
 		"java": ">=17",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

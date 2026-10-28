@@ -55,5 +55,5 @@
       ]
     }
   ],
-  "random_sequence": "minecraft:blocks/lapis_ore"
+  "random_sequence": "op-tools:blocks/deepslate_darkmatter_ore"
 }

@@ -70,11 +70,6 @@ public class RefineryBlockEntity extends BlockEntity implements ExtendedScreenHa
         }
     }
 
-    @Override
-    public void markDirty() {
-        world.updateListeners(pos, getCachedState(), getCachedState(), 3);
-        super.markDirty();
-    }
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
@@ -125,21 +120,16 @@ public class RefineryBlockEntity extends BlockEntity implements ExtendedScreenHa
         }
         //called every tick
 
-        if(isOutputSlotEmptyOrReceivable()){
-            if(this.hasRecipe()){
-                this.increaseCraftProgress();
-                markDirty(world, pos, state);
-
-                if(hasCraftingFinished()){
-                    this.craftItem();
-                    this.resetProgress();
-                }
-            } else {
+        if (isOutputSlotEmptyOrReceivable() && this.hasRecipe()) {
+            this.increaseCraftProgress();
+            if (hasCraftingFinished()) {
+                this.craftItem();
                 this.resetProgress();
             }
-        } else {
+            this.markDirty();
+        } else if (this.progress != 0) {
             this.resetProgress();
-            markDirty(world, pos, state);
+            this.markDirty();
         }
     }
 
