@@ -69,13 +69,6 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Ext
     }
 
     @Override
-    public void setChanged() {
-        assert level != null;
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-        super.setChanged();
-    }
-
-    @Override
     protected void saveAdditional(ValueOutput writeView) {
         super.saveAdditional(writeView);
         ContainerHelper.saveAllItems(writeView, this.inventory);
@@ -132,21 +125,16 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Ext
         }
         //called every tick
 
-        if(isOutputSlotEmptyOrReceivable()){
-            if(this.hasRecipe()){
-                this.increaseCraftProgress();
-                setChanged(world, pos, state);
-
-                if(hasCraftingFinished()){
-                    this.craftItem();
-                    this.resetProgress();
-                }
-            } else {
+        if (isOutputSlotEmptyOrReceivable() && this.hasRecipe()) {
+            this.increaseCraftProgress();
+            if (hasCraftingFinished()) {
+                this.craftItem();
                 this.resetProgress();
             }
-        } else {
+            this.setChanged();
+        } else if (this.progress != 0) {
             this.resetProgress();
-            setChanged(world, pos, state);
+            this.setChanged();
         }
     }
 
