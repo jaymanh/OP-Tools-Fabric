@@ -5,16 +5,18 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import org.jetbrains.annotations.Nullable;
 
 public class RefineryScreenHandler extends ScreenHandler {
     private  final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
-    public final RefineryBlockEntity blockEntity;
+    public final @Nullable RefineryBlockEntity blockEntity;
 
     public RefineryScreenHandler(int syncId, PlayerInventory playerInventory, BlockPosPayload payload) {
         this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(payload.pos()),
@@ -24,11 +26,16 @@ public class RefineryScreenHandler extends ScreenHandler {
     public RefineryScreenHandler(int syncId, PlayerInventory playerInventory,
                                      BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
         super(ModScreenHandlers.REFINERY_SCREEN_HANDLER, syncId);
-        checkSize(((Inventory) blockEntity), 2);
-        this.inventory = ((Inventory) blockEntity);
-        inventory.onOpen(playerInventory.player);
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((RefineryBlockEntity) blockEntity);
+        if (blockEntity instanceof RefineryBlockEntity refinery) {
+            checkSize(refinery, 2);
+            this.inventory = refinery;
+            this.blockEntity = refinery;
+            refinery.onOpen(playerInventory.player);
+        } else {
+            this.inventory = new SimpleInventory(2);
+            this.blockEntity = null;
+        }
 
         this.addSlot(new Slot(inventory, 0, 80, 11));
         this.addSlot(new Slot(inventory, 1, 80, 59) {
@@ -102,7 +109,7 @@ public class RefineryScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return this.inventory.canPlayerUse(player);
+        return this.blockEntity != null && this.inventory.canPlayerUse(player);
     }
 }
 
