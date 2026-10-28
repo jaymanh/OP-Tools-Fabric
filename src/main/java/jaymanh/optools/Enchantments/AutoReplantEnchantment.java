@@ -54,8 +54,7 @@ public class AutoReplantEnchantment {
         if (!world.getBlockState(pos).isAir()) {
             return;
         }
-        if (player.isBlockBreakingRestricted(world, pos, player.interactionManager.getGameMode())
-                || !world.canPlayerModifyAt(player, pos)) {
+        if (!ModEnchantments.mayAlter(world, player, pos)) {
             return;
         }
 
