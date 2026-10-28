@@ -2,6 +2,7 @@ package jaymanh.optools.GUI.Screen;
 
 import jaymanh.optools.Blocks.BlockEntitys.RefineryBlockEntity;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -10,11 +11,12 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.Nullable;
 
 public class RefineryScreenHandler extends AbstractContainerMenu {
     private  final Container inventory;
     private final ContainerData propertyDelegate;
-    public final RefineryBlockEntity blockEntity;
+    public final @Nullable RefineryBlockEntity blockEntity;
 
     public RefineryScreenHandler(int syncId, Inventory playerInventory, BlockPosPayload payload) {
         this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(payload.pos()),
@@ -22,13 +24,18 @@ public class RefineryScreenHandler extends AbstractContainerMenu {
     }
 
     public RefineryScreenHandler(int syncId, Inventory playerInventory,
-                                     BlockEntity blockEntity, ContainerData arrayPropertyDelegate) {
+                                     @Nullable BlockEntity blockEntity, ContainerData arrayPropertyDelegate) {
         super(ModScreenHandlers.REFINERY_SCREEN_HANDLER, syncId);
-        checkContainerSize(((Container) blockEntity), 2);
-        this.inventory = ((Container) blockEntity);
-        inventory.startOpen(playerInventory.player);
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = ((RefineryBlockEntity) blockEntity);
+        if (blockEntity instanceof RefineryBlockEntity refinery) {
+            checkContainerSize(refinery, 2);
+            this.inventory = refinery;
+            this.blockEntity = refinery;
+            refinery.startOpen(playerInventory.player);
+        } else {
+            this.inventory = new SimpleContainer(2);
+            this.blockEntity = null;
+        }
 
         this.addSlot(new Slot(inventory, 0, 80, 11));
         this.addSlot(new Slot(inventory, 1, 80, 59) {
@@ -102,7 +109,7 @@ public class RefineryScreenHandler extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return this.inventory.stillValid(player);
+        return this.blockEntity != null && this.inventory.stillValid(player);
     }
 }
 
