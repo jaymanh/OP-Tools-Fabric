@@ -1,9 +1,17 @@
 package jaymanh.optools.Enchantments;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 import static jaymanh.optools.OpTools.MOD_ID;
 
@@ -19,5 +27,32 @@ public class ModEnchantments {
 
     public static void initialise(){
 
+    }
+
+    public static int itemLevel(ServerWorld world, ItemStack stack, RegistryKey<Enchantment> enchantment) {
+        if (stack.isEmpty()) {
+            return 0;
+        }
+        Optional<RegistryEntry.Reference<Enchantment>> holder = holder(world, enchantment);
+        if (holder.isEmpty()) {
+            return 0;
+        }
+        return EnchantmentHelper.getLevel(holder.get(), stack);
+    }
+
+    public static int entityLevel(ServerWorld world, LivingEntity entity, RegistryKey<Enchantment> enchantment) {
+        Optional<RegistryEntry.Reference<Enchantment>> holder = holder(world, enchantment);
+        if (holder.isEmpty()) {
+            return 0;
+        }
+        return EnchantmentHelper.getEquipmentLevel(holder.get(), entity);
+    }
+
+    private static Optional<RegistryEntry.Reference<Enchantment>> holder(ServerWorld world, RegistryKey<Enchantment> enchantment) {
+        Registry<Enchantment> registry = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT);
+        if (registry == null) {
+            return Optional.empty();
+        }
+        return registry.getEntry(enchantment);
     }
 }

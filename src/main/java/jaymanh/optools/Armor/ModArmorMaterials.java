@@ -23,15 +23,15 @@ public class ModArmorMaterials implements ArmorMaterials {
 
     public static final ArmorMaterial DIAMONDILLIUM = new ArmorMaterial(DIAMONDILLIUM_DURABILITY_MULTIPLIER, Util.make(new EnumMap(EquipmentType.class), map -> {
         map.put(EquipmentType.BOOTS, 5);
-        map.put(EquipmentType.LEGGINGS, 9);
-        map.put(EquipmentType.CHESTPLATE, 7);
+        map.put(EquipmentType.LEGGINGS, 7);
+        map.put(EquipmentType.CHESTPLATE, 9);
         map.put(EquipmentType.HELMET, 4);
     }), 24, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 4, 1, TagKey.of(RegistryKeys.ITEM, Identifier.of(MOD_ID,"diamondillium_repair_item")), CustomArmorModels.DIAMONDILLIUM);
 
     public static final ArmorMaterial DIAMONDIUM = new ArmorMaterial(DIAMONDIUM_DURABILITY_MULTIPLIER, Util.make(new EnumMap(EquipmentType.class), map -> {
         map.put(EquipmentType.BOOTS, 7);
-        map.put(EquipmentType.LEGGINGS, 15);
-        map.put(EquipmentType.CHESTPLATE, 11);
+        map.put(EquipmentType.LEGGINGS, 11);
+        map.put(EquipmentType.CHESTPLATE, 15);
         map.put(EquipmentType.HELMET, 6);
     }), 24, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 6, 1.5f, DIAMONDIUM_REPAIR_ITEMS, CustomArmorModels.DIAMONDIUM);
 
