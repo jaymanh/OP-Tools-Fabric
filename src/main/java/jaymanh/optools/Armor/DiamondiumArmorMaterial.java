@@ -25,8 +25,8 @@ public class DiamondiumArmorMaterial implements ArmorMaterial {
     @Override
     public int getProtection(ArmorItem.Type type){
         return switch (type){
-            case BOOTS -> 6;
-            case HELMET -> 7;
+            case BOOTS -> 7;
+            case HELMET -> 6;
             case LEGGINGS -> 10;
             case CHESTPLATE -> 13;
             default -> 0;
