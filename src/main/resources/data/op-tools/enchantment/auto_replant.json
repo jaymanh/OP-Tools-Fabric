@@ -16,15 +16,5 @@
   "anvil_cost": 0,
   "slots": [
     "mainhand"
-  ],
-  "effects": {
-    "minecraft:hit_block": [
-      {
-        "effect": {
-            "type": "op-tools:run_code",
-          "hook": "crop_break"
-        }
-      }
-    ]
-  }
+  ]
 }
