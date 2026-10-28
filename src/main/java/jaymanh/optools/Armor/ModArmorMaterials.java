@@ -33,10 +33,10 @@ public class ModArmorMaterials {
 
     public static final RegistryEntry<ArmorMaterial> DIAMONDILLIUM = registerMaterial("diamondillium",
             Map.of(
-                    ArmorItem.Type.HELMET, 5,
+                    ArmorItem.Type.HELMET, 4,
                     ArmorItem.Type.CHESTPLATE, 9,
                     ArmorItem.Type.LEGGINGS, 7,
-                    ArmorItem.Type.BOOTS, 4
+                    ArmorItem.Type.BOOTS, 5
             ),
             24,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,
@@ -47,10 +47,10 @@ public class ModArmorMaterials {
 
     public static final RegistryEntry<ArmorMaterial> DIAMONDIUM = registerMaterial("diamondium",
             Map.of(
-                    ArmorItem.Type.HELMET, 7,
+                    ArmorItem.Type.HELMET, 6,
                     ArmorItem.Type.CHESTPLATE, 15,
                     ArmorItem.Type.LEGGINGS, 11,
-                    ArmorItem.Type.BOOTS, 6
+                    ArmorItem.Type.BOOTS, 7
             ),
             24,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,

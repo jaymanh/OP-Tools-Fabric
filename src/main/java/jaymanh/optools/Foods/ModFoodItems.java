@@ -19,7 +19,8 @@ public class ModFoodItems {
 
     public static final Item SUPER_MEAT = register(new Item(new Item.Settings().rarity(Rarity.RARE).food(new FoodComponent.Builder()
                     .nutrition(20)
-                    .saturationModifier(20)
+                    // Yarn leaves FOOD_SATURATION_SUPERNATURAL unnamed. Vanilla's value is 1.2.
+                    .saturationModifier(1.2f)
                     .build())),
             "super_meat");
 
