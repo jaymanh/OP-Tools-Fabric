@@ -8,8 +8,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.Optional;
 
@@ -46,6 +48,13 @@ public class ModEnchantments {
             return 0;
         }
         return EnchantmentHelper.getEquipmentLevel(holder.get(), entity);
+    }
+
+    public static boolean mayAlter(ServerWorld world, ServerPlayerEntity player, BlockPos pos) {
+        if (player.isBlockBreakingRestricted(world, pos, player.interactionManager.getGameMode())) {
+            return false;
+        }
+        return world.canPlayerModifyAt(player, pos);
     }
 
     private static Optional<RegistryEntry.Reference<Enchantment>> holder(ServerWorld world, RegistryKey<Enchantment> enchantment) {

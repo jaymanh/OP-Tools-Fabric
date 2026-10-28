@@ -43,7 +43,7 @@ public class TreeBreakerEnchantment {
         int broken = 1;
         while (!queue.isEmpty() && broken < MAX_BLOCKS) {
             BlockPos current = queue.removeFirst();
-            if (!mayAlter(world, player, current)) {
+            if (!ModEnchantments.mayAlter(world, player, current)) {
                 continue;
             }
             BlockState state = world.getBlockState(current);
@@ -81,10 +81,4 @@ public class TreeBreakerEnchantment {
         }
     }
 
-    private static boolean mayAlter(ServerWorld world, ServerPlayerEntity player, BlockPos pos) {
-        if (player.isBlockBreakingRestricted(world, pos, player.interactionManager.getGameMode())) {
-            return false;
-        }
-        return world.canPlayerModifyAt(player, pos);
-    }
 }

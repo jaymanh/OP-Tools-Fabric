@@ -1,6 +1,5 @@
 package jaymanh.optools.Foods;
 
-import net.minecraft.entity.player.HungerConstants;
 import jaymanh.optools.OpTools;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.type.FoodComponent;
@@ -20,7 +19,8 @@ public class ModFoodItems {
 
     public static final Item SUPER_MEAT = register(new Item(new Item.Settings().rarity(Rarity.RARE).food(new FoodComponent.Builder()
                     .nutrition(20)
-                    .saturationModifier(HungerConstants.FOOD_SATURATION_SUPERNATURAL)
+                    // Yarn leaves FOOD_SATURATION_SUPERNATURAL unnamed. Vanilla's value is 1.2.
+                    .saturationModifier(1.2f)
                     .build())),
             "super_meat");
 
