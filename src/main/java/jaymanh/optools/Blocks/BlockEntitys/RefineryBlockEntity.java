@@ -70,12 +70,6 @@ public class RefineryBlockEntity extends LockableContainerBlockEntity implements
         };
     }
 
-    @Override
-    public void markDirty() {
-        assert world != null;
-        world.updateListeners(pos, getCachedState(), getCachedState(), 3);
-        super.markDirty();
-    }
 
     @Override
     protected void writeData(WriteView writeView) {
@@ -139,21 +133,16 @@ public class RefineryBlockEntity extends LockableContainerBlockEntity implements
         }
         //called every tick
 
-        if(isOutputSlotEmptyOrReceivable()){
-            if(this.hasRecipe()){
-                this.increaseCraftProgress();
-                markDirty(world, pos, state);
-
-                if(hasCraftingFinished()){
-                    this.craftItem();
-                    this.resetProgress();
-                }
-            } else {
+        if (isOutputSlotEmptyOrReceivable() && this.hasRecipe()) {
+            this.increaseCraftProgress();
+            if (hasCraftingFinished()) {
+                this.craftItem();
                 this.resetProgress();
             }
-        } else {
+            this.markDirty();
+        } else if (this.progress != 0) {
             this.resetProgress();
-            markDirty(world, pos, state);
+            this.markDirty();
         }
     }
 

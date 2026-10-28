@@ -1,80 +1,81 @@
 package jaymanh.optools.Enchantments;
 
-import jaymanh.optools.OpTools;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.EnchantmentEffectContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static jaymanh.optools.OpTools.LOGGER;
-import static jaymanh.optools.Enchantments.InventoryHelper.*;
+import static jaymanh.optools.Enchantments.InventoryHelper.findItemSlot;
+import static jaymanh.optools.Enchantments.InventoryHelper.hasItemInInventory;
+import static jaymanh.optools.Enchantments.InventoryHelper.removeItemInInventory;
 
 public class AutoReplantEnchantment {
-
-    private static final Map<Block, Item> blockToItemMap = new HashMap<>();
-
-    private static final List<ReplantTask> replantTasks = new ArrayList<>();
-
-    static record ReplantTask(ServerWorld world, BlockPos pos, Block block) {}
+    private static final Map<Block, Item> BLOCK_TO_SEED = new HashMap<>();
 
     static {
-        blockToItemMap.put(Blocks.WHEAT, Items.WHEAT_SEEDS);
-        blockToItemMap.put(Blocks.CARROTS, Items.CARROT);
-        blockToItemMap.put(Blocks.POTATOES, Items.POTATO);
-        blockToItemMap.put(Blocks.BEETROOTS, Items.BEETROOT_SEEDS);
-        blockToItemMap.put(Blocks.MELON_STEM, Items.MELON_SEEDS);
-        blockToItemMap.put(Blocks.PUMPKIN_STEM, Items.PUMPKIN_SEEDS);
-        blockToItemMap.put(Blocks.NETHER_WART, Items.NETHER_WART);
-        blockToItemMap.put(Blocks.COCOA, Items.COCOA_BEANS);
-    }
-
-    private static void scheduleReplant(BlockPos blockPos, Block blockType, ServerWorld world, int level, EnchantmentEffectContext context, Entity user) {
-        Item item = blockToItemMap.get(blockType);
-        if (item != null) {
-            PlayerEntity player = (PlayerEntity) user;
-            ItemStack itemStack = new ItemStack(item);
-
-            if (hasItemInInventory(player, itemStack)) {
-                int itemSlot = findItemSlot(player, itemStack);
-                removeItemInInventory(player, itemSlot);
-                replantTasks.add(new ReplantTask(world, blockPos, blockType));
-            }
-        }
+        BLOCK_TO_SEED.put(Blocks.WHEAT, Items.WHEAT_SEEDS);
+        BLOCK_TO_SEED.put(Blocks.CARROTS, Items.CARROT);
+        BLOCK_TO_SEED.put(Blocks.POTATOES, Items.POTATO);
+        BLOCK_TO_SEED.put(Blocks.BEETROOTS, Items.BEETROOT_SEEDS);
+        BLOCK_TO_SEED.put(Blocks.MELON_STEM, Items.MELON_SEEDS);
+        BLOCK_TO_SEED.put(Blocks.PUMPKIN_STEM, Items.PUMPKIN_SEEDS);
+        BLOCK_TO_SEED.put(Blocks.NETHER_WART, Items.NETHER_WART);
+        BLOCK_TO_SEED.put(Blocks.COCOA, Items.COCOA_BEANS);
     }
 
     public static void initialise() {
-        OpTools.register(Identifier.of("crop_break"), (world, level, context, user, pos) -> {
-            BlockPos blockPos = new BlockPos(
-                    (int) Math.floor(pos.x),
-                    (int) Math.floor(pos.y),
-                    (int) Math.floor(pos.z)
-            );
-
-            Block block = world.getBlockState(blockPos).getBlock();
-
-            if (world.getBlockState(blockPos).isIn(BlockTags.CROPS)) {
-                ((ServerWorld) world).getServer().execute(() -> {
-                    scheduleReplant(blockPos, block, (ServerWorld) world, level, context, user);
-                });
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+            if (!(world instanceof ServerWorld serverWorld) || !(player instanceof ServerPlayerEntity serverPlayer)) {
+                return;
             }
+            Item seed = BLOCK_TO_SEED.get(state.getBlock());
+            if (seed == null) {
+                return;
+            }
+            ItemStack tool = serverPlayer.getMainHandStack();
+            if (ModEnchantments.itemLevel(serverWorld, tool, ModEnchantments.AUTO_REPLANT) <= 0) {
+                return;
+            }
+            replant(serverWorld, serverPlayer, pos, state, seed);
         });
     }
 
-    public static List<ReplantTask> getReplantTasks() {
-        return replantTasks;
+    private static void replant(ServerWorld world, ServerPlayerEntity player, BlockPos pos, BlockState broken, Item seed) {
+        if (!world.getBlockState(pos).isAir()) {
+            return;
+        }
+        if (!ModEnchantments.mayAlter(world, player, pos)) {
+            return;
+        }
+
+        BlockState placed = broken.getBlock().getDefaultState();
+        if (broken.contains(HorizontalFacingBlock.FACING) && placed.contains(HorizontalFacingBlock.FACING)) {
+            placed = placed.with(HorizontalFacingBlock.FACING, broken.get(HorizontalFacingBlock.FACING));
+        }
+        if (!placed.canPlaceAt(world, pos)) {
+            return;
+        }
+
+        ItemStack seedStack = new ItemStack(seed);
+        if (!hasItemInInventory(player, seedStack)) {
+            return;
+        }
+        if (!world.setBlockState(pos, placed)) {
+            return;
+        }
+        int slot = findItemSlot(player, seedStack);
+        if (slot >= 0) {
+            removeItemInInventory(player, slot);
+        }
     }
 }
