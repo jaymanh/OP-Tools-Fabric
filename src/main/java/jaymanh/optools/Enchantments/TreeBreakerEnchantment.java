@@ -1,93 +1,84 @@
 package jaymanh.optools.Enchantments;
 
-import jaymanh.optools.OpTools;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.EnchantmentEffectContext;
-import net.minecraft.entity.Entity;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.Identifier;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
-import static jaymanh.optools.OpTools.LOGGER;
-
 public class TreeBreakerEnchantment {
-
+    /** Hard cap on the whole connected break, not on a single neighbor wave. */
     private static final int MAX_BLOCKS = 64 * 9;
 
-    private static void BreakTrees(BlockPos blockPos, Block woodType, World world, int level, EnchantmentEffectContext context, Entity user) {
-        ArrayList<BlockPos> blockPosList = new ArrayList<>();
-        blockPosList.add(blockPos);
-
-        while (!blockPosList.isEmpty()) {
-            ArrayList<BlockPos> newPositions = new ArrayList<>();
-            Set<BlockPos> seenPositions = new HashSet<>();
-
-            Iterator<BlockPos> iterator = blockPosList.iterator();
-
-            while (iterator.hasNext()) {
-                BlockPos currentPos = iterator.next();
-
-                world.breakBlock(currentPos, true);
-                iterator.remove();
-
-                for (Direction direction : Direction.values()) {
-                    BlockPos offsetPos = currentPos.offset(direction);
-
-                    if (world.getBlockState(offsetPos).getBlock() == woodType && seenPositions.add(offsetPos)) {
-                        newPositions.add(offsetPos);
-                    }
-                }
-
-                for (Direction direction1 : Direction.values()) {
-                    for (Direction direction2 : Direction.values()) {
-                        if (direction1 != direction2 && direction1.getAxis() != direction2.getAxis()) {
-                            BlockPos diagonalOffset = currentPos.offset(direction1).offset(direction2);
-                            if (world.getBlockState(diagonalOffset).getBlock() == woodType && seenPositions.add(diagonalOffset)) {
-                                newPositions.add(diagonalOffset);
-                            }
-                        }
-                    }
-                }
-
-                if (newPositions.size() > MAX_BLOCKS) {
-                    for (BlockPos pos : blockPosList) {
-                        world.breakBlock(pos, true);
-                    }
-                    return;
-                }
+    public static void initialise() {
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) -> {
+            if (!(world instanceof ServerWorld serverWorld) || !(player instanceof ServerPlayerEntity serverPlayer)) {
+                return;
             }
+            if (!state.isIn(BlockTags.LOGS)) {
+                return;
+            }
+            ItemStack tool = serverPlayer.getMainHandStack();
+            if (ModEnchantments.itemLevel(serverWorld, tool, ModEnchantments.TREE_BREAKER) <= 0) {
+                return;
+            }
+            breakConnectedLogs(serverWorld, serverPlayer, pos, state.getBlock(), tool);
+        });
+    }
 
-            blockPosList.addAll(newPositions);
+    private static void breakConnectedLogs(ServerWorld world, ServerPlayerEntity player, BlockPos origin, Block woodType, ItemStack tool) {
+        Set<BlockPos> visited = new HashSet<>();
+        ArrayDeque<BlockPos> queue = new ArrayDeque<>();
+        visited.add(origin);
+        enqueueLogs(origin, world, woodType, visited, queue);
+
+        int broken = 1;
+        while (!queue.isEmpty() && broken < MAX_BLOCKS) {
+            BlockPos current = queue.removeFirst();
+            if (!ModEnchantments.mayAlter(world, player, current)) {
+                continue;
+            }
+            BlockState state = world.getBlockState(current);
+            if (state.getBlock() != woodType) {
+                continue;
+            }
+            if (!world.breakBlock(current, true, player)) {
+                continue;
+            }
+            broken++;
+            tool.damage(1, world, player, stack -> {});
+            if (tool.isEmpty() || ModEnchantments.itemLevel(world, tool, ModEnchantments.TREE_BREAKER) <= 0) {
+                return;
+            }
+            enqueueLogs(current, world, woodType, visited, queue);
         }
     }
 
-
-
-
-
-
-    public static void initialise(){
-        OpTools.register(Identifier.of("tree_breaker_hit"), (world, level, context, user, pos) -> {
-            BlockPos blockPos = new BlockPos(
-                    (int)Math.floor(pos.x),
-                    (int)Math.floor(pos.y),
-                    (int)Math.floor(pos.z)
-            );
-            //LOGGER.info(world.getBlockState(blockPos).toString());
-
-            if(world.getBlockState(blockPos).isIn(BlockTags.LOGS))
-            {
-                BreakTrees(blockPos, world.getBlockState(blockPos).getBlock(), world, level, context, user);
+    private static void enqueueLogs(BlockPos origin, ServerWorld world, Block woodType, Set<BlockPos> visited, ArrayDeque<BlockPos> queue) {
+        for (Direction direction : Direction.values()) {
+            offerLog(origin.offset(direction), world, woodType, visited, queue);
+        }
+        for (Direction first : Direction.values()) {
+            for (Direction second : Direction.values()) {
+                if (first != second && first.getAxis() != second.getAxis()) {
+                    offerLog(origin.offset(first).offset(second), world, woodType, visited, queue);
+                }
             }
-
-        });
+        }
     }
+
+    private static void offerLog(BlockPos pos, ServerWorld world, Block woodType, Set<BlockPos> visited, ArrayDeque<BlockPos> queue) {
+        if (world.getBlockState(pos).getBlock() == woodType && visited.add(pos)) {
+            queue.add(pos);
+        }
+    }
+
 }
