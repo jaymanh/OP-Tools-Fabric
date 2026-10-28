@@ -76,7 +76,7 @@ public class ElementalDamageEnchantments {
             user.setVelocity(Vec3d.ZERO);
             user.move(MovementType.SELF, new Vec3d(0, -0.8 * level, 0));
             user.setVelocity(Vec3d.ZERO);
-            user.resetFallDistance();
+            user.fallDistance = 0;
             if (user instanceof MobEntity mob) {
                 mob.getNavigation().stop();
             }
