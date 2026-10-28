@@ -15,6 +15,11 @@
   },
   "anvil_cost": 1,
   "slots": [
-    "body"
+    "mainhand",
+    "offhand",
+    "head",
+    "chest",
+    "legs",
+    "feet"
   ]
 }

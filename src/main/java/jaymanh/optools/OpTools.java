@@ -69,6 +69,5 @@ public class OpTools implements ModInitializer {
 		AutoReplantEnchantment.initialise();
 		ElementalDamageEnchantments.initialise();
 		EnchantTick.initialise();
-		EnchantEventHandler.initialise();
 	}
 }
