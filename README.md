@@ -6,6 +6,10 @@ Supported Minecraft version: **26.3** (Fabric Loader 0.19.5, Fabric API 0.160.5+
 ## Modrinth page
 [OP Tools](https://modrinth.com/mod/op-tools)
 
+## CurseForge
+
+[OP Tools](https://www.curseforge.com/minecraft/mc-mods/op-tools-jaymanh)
+
 ## Foods and Fuels
 OP Tools also adds a super fuel and food that is craftable. The fuel should smelt and entire stack in a furnace and the food will fill your hunger and saturation. 
 
